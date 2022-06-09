@@ -68,8 +68,8 @@ class MachineLearningModelHandlerScore(object):
         # download
         bucket_name = "https://console.cloud.google.com/storage/browser/recipe_project_bucket"
         source_blob_name = "recipe_Data"
-        destination_dir = f"{MODEL_PATH}"
-        # download_blob(bucket_name, source_blob_name, destination_dir)
+        destination_dir = f"{MODEL_PATH}/HGAT"
+        download_blob(bucket_name, source_blob_name, destination_dir)
 
         model = None
         if MODEL_PATH.endswith("/"):
@@ -110,7 +110,7 @@ def download_blob(bucket_name, source_blob_name, destination_dir):
     # any content from Google Cloud Storage. As we don't need additional data,
     # using `Bucket.blob` is preferred here.
     for blob in storage_client.list_blobs(os.path.basename(bucket_name)):
-        destination_file_name = os.path.join(destination_dir, blob.name.replace('/', '\\'))
+        destination_file_name = os.path.join(destination_dir, blob.name)
         blob.download_to_filename(destination_file_name)
         print(
         "Downloaded storage object {} from bucket {} to local file {}.".format(

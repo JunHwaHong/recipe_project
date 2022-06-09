@@ -22,7 +22,7 @@ from HGAT.args import config
 def load(load_wrapper=joblib.load):
     cur_path = os.path.dirname(os.path.abspath(__file__))
     args = config()
-    path = '/recipe_Data/recipe_data'
+    path = '/recipe_Data/recipe_data/'
     path = cur_path + path
 
     recipe_ingredient = pd.read_csv(os.path.join(path, '레시피_재료_내용_raw.csv'))
