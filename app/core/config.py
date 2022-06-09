@@ -27,3 +27,6 @@ logger.configure(handlers=[{"sink": sys.stderr, "level": LOGGING_LEVEL}])
 
 MODEL_PATH = config("MODEL_PATH", default="./ml/model/")
 MODEL_NAME = config("MODEL_NAME", default="model.pkl")
+
+MODEL_ABS_PATH = config("MODEL_ABS_APTH", default="/home/hong9/demo/fastapi_demo/fastapi_demo/ml/model/")
+KEY_PATH = config("KEY_PATH", default= './app/beaming-answer-351714-8aabefa34e8c.json')

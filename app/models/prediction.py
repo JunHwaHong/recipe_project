@@ -3,7 +3,7 @@ from typing import Optional
 
 
 class MachineLearningResponse(BaseModel):
-    prediction: float
+    prediction: dict
 
 
 class HealthResponse(BaseModel):

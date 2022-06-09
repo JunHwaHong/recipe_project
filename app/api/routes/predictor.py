@@ -9,21 +9,24 @@ from services.predict import MachineLearningModelHandlerScore as model
 
 router = APIRouter()
 
-get_prediction = lambda data_input: MachineLearningResponse(
-    model.predict(data_input, load_wrapper=joblib.load, method="predict_proba")
+get_prediction = lambda u_id, r_id: MachineLearningResponse(prediction=
+    model.predict(u_id, r_id, load_wrapper=joblib.load, method="predict_proba")
 )
 
 
 @router.get("/predict", response_model=MachineLearningResponse, name="predict:get-data")
-async def predict(data_input: Any = None):
-    if not data_input:
-        raise HTTPException(status_code=404, detail=f"'data_input' argument invalid!")
+async def predict(u_id: Any = None, r_id: Any = None):
+    if not u_id:
+        raise HTTPException(status_code=404, detail=f"u_id : {u_id} argument invalid!")
     try:
-        prediction = get_prediction(data_input)
+        prediction = get_prediction(u_id, r_id)
+        print("pre")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Exception: {e}")
+        # raise HTTPException(status_code=500, detail=f"u_id : {u_id}, r_id: {r_id} argument invalid!")
 
-    return MachineLearningResponse(prediction=prediction)
+    return prediction
+    #return MachineLearningResponse(prediction=prediction)
 
 
 @router.get(
